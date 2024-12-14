@@ -18,29 +18,6 @@ def doublons(df):
     """
     return df[df.duplicated()]
 
-def nb_class_vehicles(data):
-    """
-    Affiche le nombre total par type de voitures
-    """
-    sns.countplot(data, x='Vehicle class', order=data['Vehicle class'].value_counts().index)
-    plt.xticks(rotation=90)
-    plt.show()
-
-def compte_marque(data):
-    """
-    Affiche le nombre de voiture pour chaque marque
-    """
-    sns.countplot(data, x='Make', order=data['Make'].value_counts().index)
-    plt.xticks(rotation = 90)
-    plt.show()
-
-def compte_annee(data):
-    """
-    Compte le nombre de voiture par an
-    """
-    sns.countplot(data, x='Model year')
-    plt.show()
-
 def heatmap(data):
     """
     Génère une heatmap afin de mieux visualiser les différentes relations entre chaque colonnes
@@ -108,16 +85,5 @@ def distrib_combined(data):
                  bins=20, color='green')
     plt.title("Distribution de la consommation combinée (L/100km)")
     plt.xlabel("Consommation combinée (L/100km)")
-    plt.ylabel("Fréquence")
-    plt.show()
-
-def distrib_fuel_type(data):
-    """
-    Affiche la distribution du type d'essence
-    """
-    sns.histplot(data, x='CO2 emissions (g/km)', hue='Fuel type',
-                 kde=True, bins=20, palette='viridis')
-    plt.title("Émissions de CO2 par type de carburant")
-    plt.xlabel("Émissions de CO2 (g/km)")
     plt.ylabel("Fréquence")
     plt.show()

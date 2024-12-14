@@ -1,27 +1,45 @@
+"""
+Main de la regression linéaire
+"""
+
 import visualization as visu
 import my_statistics as stats
 import ordinary_least_squares as reg
 
-csv = 'vehicles.csv'
+data = 'vehicles.csv'
 
 #Charger les données brutes
-data_brut = visu.donnees_sans_modifs(csv)
-print(data_brut.head(5))
+data_brut = visu.donnees_sans_modifs(data)
+
+#On drop les differentes colonnes qui ne servent pas au modèle
+data_filtered = data_brut.drop(['Model year', 'Make', 'Model', 'Vehicle class',
+                                'Transmission', 'Fuel type', 'CO2 rating', 'Smog rating'], axis = 1)
 
 #Résumé statistique
-print(stats.summary(data_brut))
+print(stats.summary(data_filtered))
 
-#Vérification des doublons et visualisations des données
-print(visu.doublons(data_brut))
-visu.heatmap(data_brut)
+#Vérification des doublons
+print(visu.doublons(data_filtered))
 
+#Visualisation des relations
+visu.heatmap(data_filtered)
+visu.relation_moteur_emission(data_filtered)
+visu.relation_conso_emission(data_filtered)
+visu.relation_cylindres_emission(data_filtered)
+visu.relation_ville_autoroute(data_filtered)
 
-feature_columns = ["Engine size (L)", "Cylinders", "City (L/100 km)", "Highway (L/100 km)", "Combined (L/100 km)", "Combined (mpg)"] #Variables explicatives
+#Visualisation des différentes distribution
+visu.distrib_combined(data_filtered)
+visu.distrib_emission(data_filtered)
+
+#On met en place le modèle
+feature_columns = ["Engine size (L)", "Cylinders", "City (L/100 km)", "Highway (L/100 km)",
+                   "Combined (L/100 km)", "Combined (mpg)"]
 target_column = "CO2 emissions (g/km)"
 
 #Préparation des données pour la régression
-X = data_brut[feature_columns].values
-y = data_brut[target_column].values
+X = data_filtered[feature_columns].values
+y = data_filtered[target_column].values
 
 #Création et ajustement du modèle
 model = reg.OrdinaryLeastSquares(intercept=True)
