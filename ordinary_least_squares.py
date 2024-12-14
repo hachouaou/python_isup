@@ -1,3 +1,10 @@
+"""
+Module Ordinary Least Squares (OLS)
+Implémente une régression linéaire utilisant les moindres carrés ordinaires.
+Contient la classe OrdinaryLeastSquares avec des méthodes pour ajuster un modèle,
+faire des prédictions et analyser les résultats.
+"""
+
 import numpy as np
 from matplotlib import pyplot as plt
 import seaborn as sns
@@ -32,7 +39,6 @@ class OrdinaryLeastSquares:
             XtX_inv = np.linalg.inv(X_transpose @ X)
         except:
             raise ValueError("La matrice X^T X n'est pas inversible.")
-        
         self.coeffs = XtX_inv @ X_transpose @ y
         self.y_pred = X @ self.coeffs
         self.residuals = y-self.y_pred
@@ -46,7 +52,7 @@ class OrdinaryLeastSquares:
             (self.coeffs[i] - t_critical * se[i], self.coeffs[i] + t_critical * se[i])
             for i in range(d)
         ]
-    
+
     def predict(self, Xt):
         """
         Retourne les prédictions à partir de nouvelles données de la matrice Xt.
@@ -56,22 +62,22 @@ class OrdinaryLeastSquares:
             Xt = np.hstack((np.ones((Xt.shape[0], 1)), Xt))
 
         return Xt @ self.coeffs
-    
+
     def get_coeffs(self):
         """
         Retourne les coefficients estimés.
         """
         return self.coeffs
-    
+
     def determination_coefficient(self, y_true, y_pred):
         """
         Calcule le coefficient de déterminations R^2.
         """
         ss_total = np.sum((y_true - np.mean(y_true))**2)
         ss_residual = np.sum((y_true - y_pred) ** 2)
-        
+
         return 1 - (ss_residual / ss_total)
-    
+
     def plot_residuals(self):
         """
         Affiche un graphique des résidus.
@@ -93,7 +99,7 @@ class OrdinaryLeastSquares:
         plt.xlabel("Valeurs réelles")
         plt.ylabel("Valeurs prédites")
         plt.show()
-        
+
     def plot_residual_distribution(self):
         """
         Affiche un histogramme et une courbe de densité des résidus.

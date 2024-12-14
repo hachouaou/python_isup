@@ -1,17 +1,27 @@
-import matplotlib.pyplot as plt
 import pandas as pd
-import seaborn as sns
 
 def minimum(dt, col):
+    """
+    Retourne la valeur minimale d'une colonne donnée
+    """
     return dt[col].min()
 
 def maximum(dt, col):
+    """
+    Retourne la valeur maximale d'une colonne donnée
+    """
     return dt[col].max()
 
 def mean(dt, col):
+    """
+    Calcul et retourne la moyenne d'une colonne donnée
+    """
     return sum(dt[col]) / len(dt[col])
 
 def quartiles(dt, col):
+    """
+    Retourne les différents quartiles d'une colonne donnée
+    """
     q1 = dt[col].quantile(0.25)
     q2 = dt[col].quantile(0.50) #mediane
     q3 = dt[col].quantile(0.75)
@@ -19,11 +29,16 @@ def quartiles(dt, col):
     return q1, q2, q3
 
 def standard_deviation(dt, col):
+    """
+    Calcule et retourne l'écart type d'une colonne donnée
+    """
     moy = mean(dt, col)
     return (sum((dt[col] - moy) ** 2) / len(dt[col])) ** (1/2)
 
 def summary(dt):
-
+    """
+    Retourne le résumé statistique de chaque colonne de la base de données
+    """
     summary_data = []
 
     for col in dt.columns:
