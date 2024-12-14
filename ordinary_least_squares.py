@@ -1,5 +1,6 @@
 import numpy as np
 from matplotlib import pyplot as plt
+import seaborn as sns
 
 class OrdinaryLeastSquares:
     """
@@ -21,6 +22,8 @@ class OrdinaryLeastSquares:
         """
         Ajuste le modèle aux données d'entrainement.
         """
+        if len(X) != len(y):
+            raise ValueError("Les dimensions de X et y ne correspondent pas.")
         if self.intercept:
             X = np.hstack((np.ones((X.shape[0], 1)), X))
 
@@ -37,7 +40,7 @@ class OrdinaryLeastSquares:
         n, d = X.shape
         mse = np.sum(self.residuals ** 2) / (n - d)
         se = np.sqrt(mse*np.diag(XtX_inv))
-        t_critical = 1.96
+        t_critical = 1.96 #ici on utilise un intervalle à 95%
 
         self.confidence_intervals = [
             (self.coeffs[i] - t_critical * se[i], self.coeffs[i] + t_critical * se[i])
@@ -83,13 +86,30 @@ class OrdinaryLeastSquares:
     def plot_predictions(self, y_true):
         """
         Affiche un graphique des valeurs prédites vs réelles.
-
-        Paramètres :
-            - y_true (np.array) : Valeurs réelles.
         """
         plt.scatter(y_true, self.y_pred)
         plt.plot([min(y_true), max(y_true)], [min(y_true), max(y_true)], color='red')
         plt.title("Prédictions vs Valeurs réelles")
         plt.xlabel("Valeurs réelles")
         plt.ylabel("Valeurs prédites")
+        plt.show()
+        
+    def plot_residual_distribution(self):
+        """
+        Affiche un histogramme et une courbe de densité des résidus.
+        """
+        sns.histplot(self.residuals, kde=True, bins=20)
+        plt.title("Distribution des résidus")
+        plt.xlabel("Résidus")
+        plt.ylabel("Densité")
+        plt.show()
+
+    def plot_absolute_residuals(self):
+        """
+        Affiche les valeurs absolues des résidus pour détecter des anomalies.
+        """
+        sns.scatterplot(x=range(len(self.residuals)), y=np.abs(self.residuals))
+        plt.title("Valeurs absolues des résidus")
+        plt.xlabel("Index")
+        plt.ylabel("Valeur absolue des résidus")
         plt.show()
