@@ -10,12 +10,13 @@ print(data_brut.head(5))
 
 #Résumé statistique
 print(stats.summary(data_brut))
-print(data_brut.describe())
 
-#Vérification des doublons
+#Vérification des doublons et visualisations des données
 print(visu.doublons(data_brut))
+visu.heatmap(data_brut)
 
-feature_columns = ["Engine size (L)", "Cylinders", "City (L/100 km)", "Highway (L/100 km)", "Combined (L/100 km)"] #Variables explicatives
+
+feature_columns = ["Engine size (L)", "Cylinders", "City (L/100 km)", "Highway (L/100 km)", "Combined (L/100 km)", "Combined (mpg)"] #Variables explicatives
 target_column = "CO2 emissions (g/km)"
 
 #Préparation des données pour la régression
