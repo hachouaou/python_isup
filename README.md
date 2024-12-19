@@ -12,9 +12,9 @@ Pour cela, on a implémenter la méthode des moindres carrés ordinaires :
 
 Considérons un modèle linéaire représenté par :
 
-\[
+$$
 y = X \beta + \varepsilon,
-\]
+$$
 
 où :
 - \( y \) est un vecteur de dimension \( n \),
@@ -24,9 +24,9 @@ où :
 
 L’estimateur des moindres carrés est donné par :
 
-\[
+$$
 \hat{\beta} = (X^T X)^{-1} X^T y.
-\]
+$$
 
 ## Installation
 
