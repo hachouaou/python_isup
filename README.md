@@ -17,10 +17,10 @@ y = X \beta + \varepsilon,
 $$
 
 où :
-- \( y \) est un vecteur de dimension \( n \),
-- \( X \) est une matrice de dimension \( n \times d \),
-- \( \beta \) est un vecteur de paramètres inconnus de dimension \( d \),
-- \( \varepsilon \) est le vecteur des erreurs de dimension \( n \).
+- y est un vecteur de dimension \( n \),
+- X est une matrice de dimension \( n \times d \),
+- \beta  est un vecteur de paramètres inconnus de dimension \( d \),
+- \varepsilon est le vecteur des erreurs de dimension \( n \).
 
 L’estimateur des moindres carrés est donné par :
 
