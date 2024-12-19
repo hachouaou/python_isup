@@ -1,25 +1,44 @@
-Dans le cas d'une régression linéaire multiple, nous disposons de d variables explicatives, notées respectivements $(x^1, ..., x^{d})$, et une variable à expliquer, notée $y$, liées par le modèle suivant :
-$$y_i=\beta_0+\beta_1x^1_i+\beta_2x^2_i+...+\beta_{d}x^{d}_i+\varepsilon_i, \quad \text{avec} \quad \beta \in \mathbb{R}^{d+1} \quad \text{et pour tout} \quad 1\le i \le n$$
-Que nous pouvous également noter:
-$$    y_i = \mathbf{X} \beta + \epsilon_i, \quad \text{pour tout} \quad 1\le i \le n$$
-où les $\varepsilon_i$ sont les résidus, nous supposons que $\varepsilon_i$ sont des variables aléatoires centrées de variance $\sigma^2$, et éventuellement de loi normale $\mathcal N(0,\sigma^2)$,
-avec:
-$$
-\mathbf{X} =
-\begin{pmatrix}
-1 & x^1_1 & ... & x^{d}_1\\
-\vdots & \vdots & \vdots & \vdots\\
-1 & x^1_n & ... & x^{d}_n
-\end{pmatrix} ; \quad \beta =( \beta_0, \beta_1, ..., \beta_{d}) ^\intercal 
-$$
-L'estimateur $\hat\beta$ obtenu par la méthode des moindres carrés est donné par:
-$$\hat\beta = (X^TX)^{-1}X^Ty$$
+## Présentation
 
-Une fois les paramètres estimés, on obtient la droite de régression:
-$$f(x) = \hat\beta_0+\hat\beta_1x^1_i+\hat\beta_2x^2_i+...+\hat\beta_{d}x^{d}_i,$$
-ce qui permet  d'effectuer des prévisions pour des nouvelle variables $x^*=(x^{*1}, ..., x^{*d})$ par: $$y^{pred}=f(x^*)=\hat\beta_0+\hat\beta_1x^{*1}_i+\hat\beta_2x^{*2}_i+...+\hat\beta_{d}x^{*d}_i$$
+Ce fichier permet de décrire le projet $linearmodel$ qui vise à créer un package python pour l'analyse d'un jeu de données et la construction d'un modèle linéaire.
 
-Les valeurs ajustées sont définies par:
-$$\hat y_i=f(x_i)=\hat\beta_0+\hat\beta_1x^1_i+\hat\beta_2x^2_i+...+\hat\beta_{d}x^{d}_i,$$
-et les résidus estimés par:
-$$\hat\varepsilon_i=y_i-\hat y_i.$$
+Le fichier 'my_statistics' regroupe différentes fonctions pour les analyses statistiques du jeu de données fourni.
+
+Le fichier 'visualization' regroupe différentes fonctions pour l'affichage et la visualisation des données.
+
+Enfin, le modèle linéaire est codé dans le fichier 'ordinary_least_squares' qui permet d'expliquer le taux d’emission de CO2 en fonction de certaines covariables du jeu de données.
+
+Pour cela, on a implémenter la méthode des moindres carrés ordinaires :
+
+Considérons un modèle linéaire représenté par :
+
+\[
+y = X \beta + \varepsilon,
+\]
+
+où :
+- \( y \) est un vecteur de dimension \( n \),
+- \( X \) est une matrice de dimension \( n \times d \),
+- \( \beta \) est un vecteur de paramètres inconnus de dimension \( d \),
+- \( \varepsilon \) est le vecteur des erreurs de dimension \( n \).
+
+L’estimateur des moindres carrés est donné par :
+
+\[
+\hat{\beta} = (X^T X)^{-1} X^T y.
+\]
+
+## Installation
+
+Pour exécuter les scripts dans ce fichier certaines bibliothèques python sont nécessaires, exécuter la commande suivante dans le dossier téléchargé avec votre env python activé avant de commencer :
+```
+pip install .
+```
+
+## Utilisation
+
+Le script principal est dans le fichier `main_linear.py`. Pour l'utiliser exécuter :
+```
+python main_linear.py
+```
+et suivez les instructions !

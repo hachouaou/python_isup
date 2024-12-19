@@ -3,7 +3,7 @@ Fichier pour tester les differentes fonctions avec pytest
 """
 import numpy as np
 import pytest
-from ordinary_least_squares import OrdinaryLeastSquares
+from linearmodel.ordinary_least_squares import OrdinaryLeastSquares
 
 def test_fit_and_predict():
     """
